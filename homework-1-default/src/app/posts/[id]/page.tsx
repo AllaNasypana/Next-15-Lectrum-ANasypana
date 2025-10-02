@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { POSTS_AMOUNT } from '@/config';
 import { getPost } from '../actions';
 
