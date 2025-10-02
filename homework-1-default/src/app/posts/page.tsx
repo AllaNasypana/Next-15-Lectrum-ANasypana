@@ -3,7 +3,7 @@ import { PostCard, Pagination } from '@/components';
 import { getPosts } from './actions';
 
 export const metadata: Metadata = {
-    title: 'List of popular questions',
+    title: 'List of popular questions ',
 
 };
 
