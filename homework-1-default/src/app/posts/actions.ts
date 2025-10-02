@@ -8,7 +8,10 @@ export const getPosts = async (page: string): Promise<{pagesCount: number, posts
 
     const pageData = +page;
     const res = await fetch(`${POSTS_URL}?_page=${page}&_limit=${POSTS_AMOUNT}`);
-    const amountPosts = +res.headers.get('x-total-count');
+
+    if(!res.ok || !res)  throw new Error(res.statusText);
+
+    const amountPosts = (res?.headers?.get('x-total-count') || 0) as unknown as number;
 
     if(!!amountPosts && pageData > amountPosts / POSTS_AMOUNT) redirect(`/posts?page=1`);
 
