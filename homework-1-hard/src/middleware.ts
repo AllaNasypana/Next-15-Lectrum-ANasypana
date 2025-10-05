@@ -25,8 +25,8 @@ export async function middleware(req:NextRequest) {
     }
 
     if(isLoggedIn && pathname === '/logout') {
-         const headerCookies= await cookies();
-         await headerCookies.delete('user');
+
+        headerCookies.delete('user');
         return NextResponse.redirect(new URL('/news', req.url))
     }
     return NextResponse.next();
