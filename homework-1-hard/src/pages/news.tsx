@@ -25,14 +25,19 @@ export default function Page({ news, page, pageAmount }: Props) {
 
 export async function getServerSideProps(con: GetServerSidePropsContext) {
     const query = con?.query;
-    let page = !!query.page && (+query?.page > 0) ? +query?.page : 1;
+    const page = !!query.page && (+query?.page > 0) ? +query?.page : 1;
 
-    let res = await fetch(`${URL_BASE}posts?_page=${page}&_limit=${NEWS_AMOUNT}`, {});
+    const res = await fetch(`${URL_BASE}posts?_page=${page}&_limit=${NEWS_AMOUNT}`, {});
     const amountNews = (res?.headers?.get('x-total-count') || 0) as unknown as number;
     const pageAmount = Math.ceil(amountNews / NEWS_AMOUNT);
     if(pageAmount < page) {
-        page = 1
-        res = await fetch(`${URL_BASE}posts?_page=${page}&_limit=${NEWS_AMOUNT}`, {});
+        return {
+            redirect: {
+                destination: `/news?page=1`,
+                permanent: false,
+            }
+        }
+
     }
 
     const news = await res.json();

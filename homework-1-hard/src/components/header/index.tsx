@@ -2,14 +2,16 @@
 import {  useRouter,  } from 'next/navigation';
 import { ActiveLink } from '../active-link';
 import { LoginButton } from './login-button';
-import { useCookie } from './useCookie'
+import { useCookie } from './useCookie';
+import { authRoutes} from '@/routes'
 
 
 export const Header = () => {
 
     const router = useRouter();
-    const { cookie} = useCookie('user');
+    const { cookie, pathname} = useCookie('user');
     const isLoggedIn = !!cookie;
+    const isAuth = !!pathname  && authRoutes.includes(pathname);
 
     return (
         <header className="flex items-center justify-between p-4 bg-neutral-100 shadow-md">
@@ -20,15 +22,17 @@ export const Header = () => {
                     {isLoggedIn && <ActiveLink href="/todos">My Tasks</ActiveLink>}
                     {isLoggedIn && <ActiveLink href="/profile">Profile</ActiveLink>}
                 </div>
-                <LoginButton isLoggedIn={isLoggedIn} onClick={() => {
+                {!isAuth && (
+                    <LoginButton isLoggedIn={isLoggedIn} onClick={() => {
 
-                    if(isLoggedIn){
-                        router.push('/logout');
-                    }else {
-                        router.push('/login');
-                    }
+                        if(isLoggedIn){
+                            router.push('/logout');
+                        }else {
+                            router.push('/login');
+                        }
 
-                }}/>
+                    }}/>
+                )}
 
             </nav>
         </header>

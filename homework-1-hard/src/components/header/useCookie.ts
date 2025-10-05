@@ -18,5 +18,5 @@ export const useCookie =(name: string) => {
         }
     }, [pathname])
 
-    return {cookie};
+    return {cookie, pathname};
 }
