@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 import { LoginSchema, loginSchema } from '@/schems';
 import {z} from 'zod';
 import { URL_BASE } from '@/config';
-import {ActionResultLogin, ITodo, IUser} from '@/types';
+import {ActionResultLogin, IUser} from '@/types';
 
 
 export const setCookie = async (data: LoginSchema): Promise<ActionResultLogin> => {
@@ -30,7 +30,8 @@ export const setCookie = async (data: LoginSchema): Promise<ActionResultLogin> =
 
 
     }catch (error) {
-        const errMessage = (error?.message || 'Something went wrong') as unknown as string;
+        const err = error as unknown as Error;
+        const errMessage = (err?.message || 'Something went wrong') as unknown as string;
         return { status: 'error', error: errMessage };
 
     }

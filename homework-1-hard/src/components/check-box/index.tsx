@@ -6,7 +6,7 @@ interface IProps {
     className?: string;
 }
 
-export const CheckBox = ({ value, onChange, label, className}: IProps) => {
+export const CheckBox = ({ value, onChange, label, }: IProps) => {
 
     return (
         <label htmlFor={label} className="flex items-center cursor-pointer mb-2">

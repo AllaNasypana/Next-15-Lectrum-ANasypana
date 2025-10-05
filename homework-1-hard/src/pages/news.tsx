@@ -1,3 +1,4 @@
+import type { GetServerSidePropsContext } from 'next';
 import { INews} from '@/types';
 import {URL_BASE, NEWS_AMOUNT } from '@/config';
 import { NewsCard, Pagination } from '@/components'
@@ -22,9 +23,9 @@ export default function Page({ news, page, pageAmount }: Props) {
     );
 }
 
-export async function getServerSideProps(con) {
-    const query = con.query;
-    let page = +query?.page > 0 ? +query?.page : 1;
+export async function getServerSideProps(con: GetServerSidePropsContext) {
+    const query = con?.query;
+    let page = !!query.page && (+query?.page > 0) ? +query?.page : 1;
 
     let res = await fetch(`${URL_BASE}posts?_page=${page}&_limit=${NEWS_AMOUNT}`, {});
     const amountNews = (res?.headers?.get('x-total-count') || 0) as unknown as number;

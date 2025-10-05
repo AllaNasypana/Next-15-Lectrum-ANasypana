@@ -1,5 +1,5 @@
 'use server';
-import { IUser, ITodo } from '@/types';
+import { ITodo } from '@/types';
 import { URL_BASE} from '@/config'
 ;
 import { getUser } from '@/app/(shell)/actions'

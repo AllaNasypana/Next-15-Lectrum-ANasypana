@@ -25,7 +25,7 @@ export const UserTodos = ({todos}: IProps) => {
         }
         setTodosData(newTodos)
 
-    }, [title, completed]);
+    }, [title, completed, todos]);
 
 
 

@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import {  publicRoutes } from './routes';
 
 
-export async function middleware(req:NextRequest, res:NextResponse) {
+export async function middleware(req:NextRequest) {
     const {nextUrl: {pathname}} = req;
     const headerCookies= await cookies();
     const user = headerCookies?.get('user')

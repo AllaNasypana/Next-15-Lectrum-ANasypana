@@ -4,9 +4,6 @@ import { ActiveLink } from '../active-link';
 import { LoginButton } from './login-button';
 import { useCookie } from './useCookie'
 
-interface IProps {
-
-}
 
 export const Header = () => {
 
