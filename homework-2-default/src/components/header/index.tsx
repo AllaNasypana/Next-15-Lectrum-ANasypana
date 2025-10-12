@@ -1,5 +1,5 @@
 'use client'
-import {useState, useEffect } from 'react'
+
 import { LuShoppingCart } from "react-icons/lu";
 import {  useRouter,usePathname } from 'next/navigation';
 import { ActiveLink } from '../active-link';
