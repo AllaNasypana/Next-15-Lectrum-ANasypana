@@ -5,18 +5,18 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { ProductsSchema } from '@/schems';
 import { toastOptions } from '@/config';
+import {revalidateCartPage, revalidateRootPage} from "@/app/cart/actions";
 
 import Image from "next/image";
 
 
 interface IProps {
     product: ProductsSchema;
-    revalidatedByTag?: (tag: string) => Promise<void>;
     isLoggedIn: boolean;
 }
 
 
-export const ProductCard: FunctionComponent<IProps> = ({product, revalidatedByTag, isLoggedIn}) => {
+export const ProductCard: FunctionComponent<IProps> = ({product, isLoggedIn}) => {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
@@ -26,9 +26,8 @@ export const ProductCard: FunctionComponent<IProps> = ({product, revalidatedByTa
             const res = await fetch('/api/cart', {method: "POST", body: JSON.stringify(product)});
             if(res.status !== 201) throw new Error('Product was not added');
             await res.json();
-            if(revalidatedByTag) {
-                await revalidatedByTag('carts')
-            }
+            revalidateCartPage();
+            revalidateRootPage();
             toast.success(`${product.title} was added`, toastOptions)
 
         }catch (_){
@@ -57,17 +56,19 @@ export const ProductCard: FunctionComponent<IProps> = ({product, revalidatedByTa
                 <div className="px-6 pt-4 pb-2 mt-auto">
                     <span className="text-lg font-semibold">${product.price.toFixed(2)}</span>
                     {isLoggedIn && (
-                        <button
-                            type={'button'}
-                            onClick={ (event) => {
-                                event.stopPropagation();
-                                handlerAddProductToCard();
-                            }}
-                            disabled={isLoading}
-                            className="bg-blue-500 hover:bg-blue-700 hover:cursor-pointer
+                        <form action={handlerAddProductToCard}>
+                            <button
+                                type={'submit'}
+                                onClick={ (event) => {
+                                    event.stopPropagation();
+                                }}
+                                disabled={isLoading}
+                                className="bg-blue-500 hover:bg-blue-700 hover:cursor-pointer
                         text-white font-bold py-2 px-4 rounded ml-4 disabled:opacity-50 disabled:cursor-not-allowed">
-                            Add to Cart
-                        </button>
+                                Add to Cart
+                            </button>
+                        </form>
+
                     )}
 
                 </div>

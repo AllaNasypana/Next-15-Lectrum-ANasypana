@@ -5,14 +5,14 @@ import { toast } from 'react-toastify';
 import { ProductsSchema } from '@/schems';
 import { toastOptions } from '@/config';
 import Image from "next/image";
+import {revalidateCartPage, revalidateRootPage} from "@/app/cart/actions";
 
 
 interface IProps {
     product: ProductsSchema;
-    revalidatedByTag: (tag: string) => Promise<void>;
 }
 
-export const ProductItem:FunctionComponent<IProps> = ({ product, revalidatedByTag}) => {
+export const ProductItem:FunctionComponent<IProps> = ({ product}) => {
     const [isLoading, setIsLoading] = useState(false);
     const handlerAddProductToCard = async () => {
         setIsLoading(true)
@@ -20,13 +20,14 @@ export const ProductItem:FunctionComponent<IProps> = ({ product, revalidatedByTa
             const res = await fetch('/api/cart', {method: "POST", body: JSON.stringify(product)});
             if(res.status !== 201) throw new Error('Product was not added');
             await res.json();
-            await revalidatedByTag('carts')
             toast.success(`${product.title} was added`, toastOptions)
 
         }catch (_){
             toast.error(`${product.title} was not added`, toastOptions)
 
         }finally {
+            revalidateRootPage();
+            revalidateCartPage();
             setIsLoading(false)
         }
     }
@@ -48,14 +49,16 @@ export const ProductItem:FunctionComponent<IProps> = ({ product, revalidatedByTa
                 </h2>
                 <div className={'text-gray-900 font-bold text-xl mb-8 text-center'}>${product.price.toFixed(2)}</div>
                 <div className={'text-gray-900 text-md mb-4 text-center'}>{product.description}</div>
-                <button
-                    type={'button'}
-                    onClick={handlerAddProductToCard}
-                    disabled={isLoading}
-                    className="bg-blue-500 hover:bg-blue-700 hover:cursor-pointer
+                <form action={handlerAddProductToCard}>
+                    <button
+                        type={'submit'}
+                        disabled={isLoading}
+                        className="bg-blue-500 hover:bg-blue-700 hover:cursor-pointer
                         text-white font-bold py-2 px-4 rounded mt-auto disabled:opacity-50 disabled:cursor-not-allowed">
-                    Add to Cart
-                </button>
+                        Add to Cart
+                    </button>
+                </form>
+
             </div>
         </div>
 

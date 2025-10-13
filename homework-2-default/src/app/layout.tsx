@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { Header, Providers } from '@/components';
-import { getCarts, revalidateRootPage  } from '@/app/cart/actions'
 import {getUser} from "@/app/(auth)/actions";
 
 
@@ -26,7 +25,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-    const cartData = await getCarts();
+
     const user = await getUser();
 
   return (
@@ -34,10 +33,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <Header
-          revalidateRootPage={revalidateRootPage}
-          user={user}
-          cartAmount={cartData.carts.reduce((acc, cur) => acc + cur.quantity , 0) ?? 0}/>
+      <Header user={user} />
       <main className={'p-4'}>
           <div className={'bg-white rounded-2xl shadow-2xl p-8 '}>
               <Providers>

@@ -1,5 +1,5 @@
 import { getUser } from '@/app/(auth)/actions';
-import { getPopularProducts, revalidatedByTag } from '@/app/products/actions';
+import { getPopularProducts } from '@/app/products/actions';
 import { ProductCard} from "@/components"
 
 export default async function HomePage() {
@@ -14,8 +14,7 @@ export default async function HomePage() {
                     <ProductCard
                         product={product}
                         isLoggedIn={!!user}
-                        key={product.id.toString()}
-                        revalidatedByTag={revalidatedByTag} />)}
+                        key={product.id.toString()} />)}
 
             </div>
         </div>

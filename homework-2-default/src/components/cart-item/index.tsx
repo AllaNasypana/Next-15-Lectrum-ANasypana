@@ -7,14 +7,15 @@ import { CartType } from '@/app/api/cart/route';
 import { toastOptions } from '@/config';
 
 import Image from "next/image";
+import { revalidateCartPage} from "@/app/cart/actions";
 
 
 interface IProps {
     product: CartType;
-    revalidatedByTag: (tag: string) => Promise<void>;
+    onChangeKey: () => void
 }
 
-export const CartItem:FunctionComponent<IProps> = ({ product, revalidatedByTag }) => {
+export const CartItem:FunctionComponent<IProps> = ({ product, onChangeKey }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handlerRemoveProduct = async () => {
@@ -24,8 +25,9 @@ export const CartItem:FunctionComponent<IProps> = ({ product, revalidatedByTag }
 
             if(!res.ok) throw new Error('Product was not deleted');
             await res.json();
-            await revalidatedByTag('carts')
-            toast.success(`${product.title} was removed`, toastOptions)
+            revalidateCartPage();
+            toast.success(`${product.title} was removed`, toastOptions);
+            onChangeKey();
 
         }catch (_){
             toast.error(`${product.title} was not removed`, toastOptions)
@@ -60,13 +62,15 @@ export const CartItem:FunctionComponent<IProps> = ({ product, revalidatedByTag }
                     <p className="text-gray-500">Qty {product.quantity}</p>
 
                     <div className="flex">
-                        <button
-                            onClick={handlerRemoveProduct}
-                            disabled={isLoading}
-                            type="button"
-                            className="font-medium
+                        <form action={handlerRemoveProduct}>
+                            <button
+                                disabled={isLoading}
+                                type="submit"
+                                className="font-medium
                                 text-blue-500 hover:text-blue-700
                                 hover:font-bold hover:cursor-pointer disabled:text-gray-500 disabled:cursor-not-allowed">Remove</button>
+                        </form>
+
                     </div>
                 </div>
             </div>

@@ -9,11 +9,11 @@ import { IntentionPrefetchLink } from '../intention-prefetch-link';
 import { LoginSchema } from '@/schems';
 import {addingNewLinks } from '@/utils';
 import { ERole } from '@/types';
+import {revalidateCartPage, revalidateRootPage} from "@/app/cart/actions";
+
 
 interface IProps {
-    cartAmount: number;
     user: LoginSchema | null;
-    revalidateRootPage: () => Promise<void>;
 }
 
 
@@ -37,10 +37,11 @@ const headersRoutes = [
 ]
 
 
-export const Header = ({cartAmount, user, revalidateRootPage}: IProps) => {
+export const Header = ({ user}: IProps) => {
 
     const router = useRouter();
     const pathname = usePathname();
+
     let links = [...headersRoutes];
 
     const isLoggedIn = !!user;
@@ -71,7 +72,6 @@ export const Header = ({cartAmount, user, revalidateRootPage}: IProps) => {
                     {
                         isLoggedIn && (
                             <IntentionPrefetchLink className='flex items-center pt-2.5 text-xl text-blue-500' href={'/cart'}>
-                                {!!cartAmount ? cartAmount : ''}
                                 <LuShoppingCart size={24} color={'oklch(62.3% 0.214 259.815)'}/>
                             </IntentionPrefetchLink>
                         )
@@ -82,7 +82,8 @@ export const Header = ({cartAmount, user, revalidateRootPage}: IProps) => {
                             if(isLoggedIn){
                                 await fetch(`/api/cart/all`, {method: "DELETE"});
                                 router.push('/logout');
-                                await revalidateRootPage()
+                                await revalidateRootPage();
+                                await revalidateCartPage();
                             }else {
                                 router.push('/login');
                             }
