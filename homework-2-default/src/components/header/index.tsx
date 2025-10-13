@@ -9,7 +9,7 @@ import { IntentionPrefetchLink } from '../intention-prefetch-link';
 import { LoginSchema } from '@/schems';
 import {addingNewLinks } from '@/utils';
 import { ERole } from '@/types';
-import {revalidateCartPage, revalidateRootPage} from "@/app/cart/actions";
+import { revalidateRootPage} from "@/app/(auth)/actions";
 
 
 interface IProps {
@@ -83,7 +83,6 @@ export const Header = ({ user}: IProps) => {
                                 await fetch(`/api/cart/all`, {method: "DELETE"});
                                 router.push('/logout');
                                 await revalidateRootPage();
-                                await revalidateCartPage();
                             }else {
                                 router.push('/login');
                             }

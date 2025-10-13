@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { ProductsSchema } from '@/schems';
 import { toastOptions } from '@/config';
 import Image from "next/image";
-import {revalidateCartPage, revalidateRootPage} from "@/app/cart/actions";
 
 
 interface IProps {
@@ -26,8 +25,6 @@ export const ProductItem:FunctionComponent<IProps> = ({ product}) => {
             toast.error(`${product.title} was not added`, toastOptions)
 
         }finally {
-            revalidateRootPage();
-            revalidateCartPage();
             setIsLoading(false)
         }
     }

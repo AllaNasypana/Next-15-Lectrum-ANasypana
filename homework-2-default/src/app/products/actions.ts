@@ -2,7 +2,7 @@
 
 import { ProductsSchema } from '@/schems';
 import { URL_BASE_FOR_PRODUCTS} from '@/config';
-import { revalidateTag } from 'next/cache';
+
 
 export const getAllCategories = async () => {
     const res = await fetch(`${URL_BASE_FOR_PRODUCTS}products`,  {
@@ -53,9 +53,4 @@ export const getProductsById = async (id: string) => {
 
 };
 
-export const revalidatedByTag = async (tag: string) => {
-
-    await revalidateTag(tag);
-
-}
 

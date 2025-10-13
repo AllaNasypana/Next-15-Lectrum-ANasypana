@@ -7,7 +7,6 @@ import { CartType } from '@/app/api/cart/route';
 import { toastOptions } from '@/config';
 
 import Image from "next/image";
-import { revalidateCartPage} from "@/app/cart/actions";
 
 
 interface IProps {
@@ -25,7 +24,6 @@ export const CartItem:FunctionComponent<IProps> = ({ product, onChangeKey }) => 
 
             if(!res.ok) throw new Error('Product was not deleted');
             await res.json();
-            revalidateCartPage();
             toast.success(`${product.title} was removed`, toastOptions);
             onChangeKey();
 

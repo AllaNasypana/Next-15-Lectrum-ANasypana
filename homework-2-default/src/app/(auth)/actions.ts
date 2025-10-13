@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { LoginSchema, loginSchema,  } from '@/schems';
 import {z} from 'zod';
 import {ActionResultLogin, } from '@/types';
+import {revalidatePath, revalidateTag} from "next/cache";
 
 
 export const setCookie = async (data: LoginSchema): Promise<ActionResultLogin> => {
@@ -33,3 +34,15 @@ export const getUser = async (): Promise<LoginSchema | null> => {
     const user = JSON.parse(userCookie.value) as unknown as LoginSchema;
     return user;
 }
+
+export const revalidatedByTag = async (tag: string) => {
+    revalidateTag(tag);
+}
+
+export const revalidateRootPage = async () => {
+    revalidatePath('/', 'page');
+};
+
+export const revalidateCartPage = async () => {
+    revalidatePath('/cart', 'page');
+};
