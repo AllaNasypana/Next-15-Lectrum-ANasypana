@@ -27,7 +27,7 @@ export const CartItem:FunctionComponent<IProps> = ({ product, revalidatedByTag }
             await revalidatedByTag('carts')
             toast.success(`${product.title} was removed`, toastOptions)
 
-        }catch (err){
+        }catch (_){
             toast.error(`${product.title} was not removed`, toastOptions)
 
         }finally {

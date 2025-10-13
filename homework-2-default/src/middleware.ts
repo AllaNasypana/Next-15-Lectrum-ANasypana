@@ -1,5 +1,4 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { forbidden } from 'next/navigation';
 import { cookies } from 'next/headers';
 
 
@@ -11,7 +10,6 @@ export async function middleware(req:NextRequest) {
 
     const headerCookies= await cookies();
     const user = headerCookies?.get('user');
-    const userData = !!user?.value ? JSON.parse(user?.value) : {};
 
     const isLoggedIn = !!user && !!user.value;
 

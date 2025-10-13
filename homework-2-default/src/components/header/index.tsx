@@ -80,7 +80,7 @@ export const Header = ({cartAmount, user, revalidateRootPage}: IProps) => {
                         <LoginButton isLoggedIn={isLoggedIn} onClick={async () => {
 
                             if(isLoggedIn){
-                                const res = await fetch(`/api/cart/all`, {method: "DELETE"});
+                                await fetch(`/api/cart/all`, {method: "DELETE"});
                                 router.push('/logout');
                                 await revalidateRootPage()
                             }else {

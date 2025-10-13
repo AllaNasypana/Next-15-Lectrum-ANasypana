@@ -23,7 +23,7 @@ export const ProductItem:FunctionComponent<IProps> = ({ product, revalidatedByTa
             await revalidatedByTag('carts')
             toast.success(`${product.title} was added`, toastOptions)
 
-        }catch (err){
+        }catch (_){
             toast.error(`${product.title} was not added`, toastOptions)
 
         }finally {

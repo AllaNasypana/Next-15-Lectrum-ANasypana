@@ -1,9 +1,8 @@
 'use client'
 
 import { FunctionComponent, useState} from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { IntentionPrefetchLink } from '../intention-prefetch-link';
 import { ProductsSchema } from '@/schems';
 import { toastOptions } from '@/config';
 
@@ -32,7 +31,7 @@ export const ProductCard: FunctionComponent<IProps> = ({product, revalidatedByTa
             }
             toast.success(`${product.title} was added`, toastOptions)
 
-        }catch (err){
+        }catch (_){
             toast.error(`${product.title} was not added`, toastOptions)
 
         }finally {

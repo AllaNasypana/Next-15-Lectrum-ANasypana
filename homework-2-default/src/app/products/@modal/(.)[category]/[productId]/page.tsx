@@ -17,13 +17,10 @@ export default function PostInModal({ params }: { params: Promise<{ category: st
         if(productId) {
             getProductsById(productId)
                 .then(d => setProduct(d))
-                .catch(err => setError('Something went wrong'));
+                .catch(_ => setError('Something went wrong'));
         }
 
     }, [productId, router, category]);
-
-
-
 
 
     return (

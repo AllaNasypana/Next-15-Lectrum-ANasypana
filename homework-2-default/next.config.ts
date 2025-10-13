@@ -30,10 +30,6 @@ const nextConfig: NextConfig = {
                 source: '/:path*',
                 headers: [
                     {
-                        key: 'X-DNS-Prefetch-Control',
-                        value: 'on',
-                    },
-                    {
                         key: 'X-Frame-Options',
                         value: 'SAMEORIGIN',
                     },
@@ -42,25 +38,6 @@ const nextConfig: NextConfig = {
                         value: 'nosniff',
                     },
 
-                ],
-            },
-
-
-            {
-                source: '/api/:path*',
-                headers: [
-                    {
-                        key: 'Access-Control-Allow-Origin',
-                        value: '*',
-                    },
-                    {
-                        key: 'Access-Control-Allow-Methods',
-                        value: 'GET, POST, PUT, DELETE, OPTIONS',
-                    },
-                    {
-                        key: 'Access-Control-Max-Age',
-                        value: '86400',
-                    },
                 ],
             },
 
