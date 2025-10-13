@@ -2,7 +2,7 @@
 
 import {useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { getProductsById, revalidatedByTag } from '../../../actions';;
+import { getProductsById } from '../../../actions';;
 import { ProductsSchema } from '@/schems';
 import {ProductItem } from "@/components";
 
@@ -38,7 +38,7 @@ export default function PostInModal({ params }: { params: Promise<{ category: st
                     'bg-white rounded-lg shadow hover:shadow-md ' +
                     'transition-shadow hover:translate-y-1 hover:text-blue-700 ' +
                     'hover:border-blue-700 text-blue-500 border-2 border-blue-500'}>Go Back</button>
-                {!!product && <ProductItem product={product} revalidatedByTag={revalidatedByTag} />}
+                {!!product && <ProductItem product={product}  />}
                 {!!error && <div className={'text-center text-red-500 text-lg font-bold'}>{error}</div>}
 
 

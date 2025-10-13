@@ -1,5 +1,5 @@
 import {ProductCard, LinkButton} from "@/components";
-import { getProductsByCategory, revalidatedByTag} from '../actions';
+import { getProductsByCategory} from '../actions';
 import { getUser } from '@/app/(auth)/actions'
 
 
@@ -24,7 +24,7 @@ export default async function CategoryPage({ params }: IProps) {
                 {products.map((product) => <ProductCard
                     isLoggedIn={!!user}
                     key={product.id.toString()}
-                    product={product} revalidatedByTag={revalidatedByTag} />)}
+                    product={product}  />)}
             </div>
         </div>
     );

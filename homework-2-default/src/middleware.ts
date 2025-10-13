@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 
 
-import {  publicRoutes, notAllowedManager, notAllowedAdmin } from './routes';
+import {  publicRoutes } from './routes';
 
 
 export async function middleware(req:NextRequest) {
