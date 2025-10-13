@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getProductsById } from '../../actions';
 import {ProductItem, LinkButton,} from '@/components';
 import { notFound } from 'next/navigation';
@@ -20,7 +21,11 @@ export default async function ProductPage({ params }: IProps) {
                 <LinkButton href={'/products'}>Go to list of categories</LinkButton>
                 <LinkButton href={`/products/${category}`}>Go to  category {category.replaceAll('%20', ' ').replaceAll('%7D', '')}</LinkButton>
             </div>
-            < ProductItem product={product} />
+            <Suspense fallback={<div className={'text-blue-500 text-lg text-center'}>Loading...</div>}>
+                < ProductItem product={product} />
+            </Suspense>
+
+
 
         </div>
     );

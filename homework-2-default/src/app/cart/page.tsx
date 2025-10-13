@@ -17,8 +17,7 @@ export default function SettingsPage() {
                 const res = await fetch('/api/cart');
                 if(res.ok) {
                     const cart = await res.json() as unknown as {carts: CartType[]; sum: number };
-                    const amount = cart.carts.reduce((acm, cur) => acm + cur.quantity * cur.price, 0);
-                    setSum(amount);
+                    setSum(cart.sum);
                     setCarts(cart.carts);
                 }
             }catch (err) {

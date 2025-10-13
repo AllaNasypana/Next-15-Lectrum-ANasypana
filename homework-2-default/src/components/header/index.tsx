@@ -10,8 +10,6 @@ import { LoginSchema } from '@/schems';
 import {addingNewLinks } from '@/utils';
 import { ERole } from '@/types';
 import { revalidateRootPage} from "@/app/(auth)/actions";
-import {useEffect, useState} from "react";
-import {CartType} from "@/app/api/cart/route";
 
 
 interface IProps {
@@ -39,11 +37,10 @@ const headersRoutes = [
 ]
 
 
-export const Header = ({ user}: IProps) => {
+export const Header = ({ user,}: IProps) => {
 
     const router = useRouter();
     const pathname = usePathname();
-
 
     let links = [...headersRoutes];
 
@@ -69,7 +66,6 @@ export const Header = ({ user}: IProps) => {
             <nav className="flex items-center justify-between  w-full">
                 <div className="flex items-center gap-2">
                     {links.map((l) => ( <ActiveLink key={`hl-${l.href}`} href={l.href}>{l.label}</ActiveLink>))}
-
                 </div>
                 <div className="flex items-center gap-2">
                     {

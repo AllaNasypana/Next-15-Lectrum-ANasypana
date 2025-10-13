@@ -1,6 +1,6 @@
 'use client'
 
-import { FunctionComponent, useState} from 'react';
+import { FunctionComponent, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ProductsSchema } from '@/schems';
 import { toastOptions } from '@/config';
