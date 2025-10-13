@@ -10,6 +10,8 @@ import { LoginSchema } from '@/schems';
 import {addingNewLinks } from '@/utils';
 import { ERole } from '@/types';
 import { revalidateRootPage} from "@/app/(auth)/actions";
+import {useEffect, useState} from "react";
+import {CartType} from "@/app/api/cart/route";
 
 
 interface IProps {
@@ -41,6 +43,7 @@ export const Header = ({ user}: IProps) => {
 
     const router = useRouter();
     const pathname = usePathname();
+
 
     let links = [...headersRoutes];
 

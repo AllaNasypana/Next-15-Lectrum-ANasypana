@@ -19,7 +19,7 @@ export const ProductItem:FunctionComponent<IProps> = ({ product}) => {
             const res = await fetch('/api/cart', {method: "POST", body: JSON.stringify(product)});
             if(res.status !== 201) throw new Error('Product was not added');
             await res.json();
-            toast.success(`${product.title} was added`, toastOptions)
+            toast.success(`${product.title} was added`, toastOptions);
 
         }catch (_){
             toast.error(`${product.title} was not added`, toastOptions)

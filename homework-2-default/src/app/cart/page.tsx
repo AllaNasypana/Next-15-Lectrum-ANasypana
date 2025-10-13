@@ -14,7 +14,7 @@ export default function SettingsPage() {
         (async () => {
             try {
                 setLoading(true);
-                const res = await fetch('/api/cart', {cache: 'no-store',});
+                const res = await fetch('/api/cart');
                 if(res.ok) {
                     const cart = await res.json() as unknown as {carts: CartType[]; sum: number };
                     const amount = cart.carts.reduce((acm, cur) => acm + cur.quantity * cur.price, 0);

@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
             ...redirects
         ]
     },
+    async rewrites() {
+        return [
+            {
+                source: '/setting/:path*',
+                destination: '/new-setting',
+            }
+
+
+        ]
+    },
     async headers() {
         return [
             {

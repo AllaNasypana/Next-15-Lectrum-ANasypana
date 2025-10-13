@@ -40,7 +40,7 @@ export const revalidatedByTag = async (tag: string) => {
 }
 
 export const revalidateRootPage = async () => {
-    revalidatePath('/', 'page');
+    revalidatePath('/', 'layout');
 };
 
 export const revalidateCartPage = async () => {
