@@ -16,12 +16,13 @@ export const getAllCategories = async () => {
 export const getProductsByCategory = async (category: string) => {
 
     const res = await fetch(`${URL_BASE_FOR_PRODUCTS}products`,  {
-        next: {revalidate: 60}
+        next: {revalidate: 360, tags: [`products-${category}`]}
     });
 
     if (!res.ok) throw new Error(res.statusText);
 
     const products = await res.json() as unknown as ProductsSchema[];
+
     return products.filter(p => p.category === category);
 };
 

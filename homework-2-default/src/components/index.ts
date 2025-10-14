@@ -6,4 +6,5 @@ export { ProductCard } from './product-card';
 export { CategoryCard } from './categoty-card';
 export { CartItem} from './cart-item';
 export { ProductItem } from './product-item';
-export { LoginForm } from './login-form'
+export { LoginForm } from './login-form';
+export { ProductWrapper } from './category-product-wrapper'
