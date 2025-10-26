@@ -6,7 +6,6 @@ import {useForm, FormProvider} from 'react-hook-form';
 import {useRouter,} from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import {toast} from 'react-toastify';
-
 import { ResetPasswordForm } from './reset-password-form';
 import {UpdatePasswordForm} from './update-password';
 
@@ -57,9 +56,12 @@ export const ForgotPasswordForm = () => {
                     code: formData.code,
                     password: formData.password,
                 })
-                if(result.status !== "complete") throw new Error('Something went wrong');
-                await setActive({ session: result.createdSessionId });
-                router.replace('/')
+                if(result?.status !== "complete") throw new Error('Something went wrong');
+                if(setActive) {
+                    await setActive({ session: result.createdSessionId });
+                    router.replace('/profile');
+                }
+
                 setActiveStep(0);
             }
         },

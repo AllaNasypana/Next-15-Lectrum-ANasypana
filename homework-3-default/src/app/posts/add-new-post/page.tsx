@@ -8,7 +8,7 @@ export default async function PostPage() {
                 <LinkButton href={'/posts'}>Go to list of posts</LinkButton>
             </div>
             <h1 className={'text-2xl text-gray-800 text-center font-bold m-6'}>Please fill fields to add your new post</h1>
-            <PostForm postPromise={null} userPromise={null} />
+            <PostForm post={null} isOwner={false} />
         </div>
     );
 }

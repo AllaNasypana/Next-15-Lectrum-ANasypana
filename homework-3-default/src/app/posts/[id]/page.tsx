@@ -1,5 +1,5 @@
 import {Suspense} from 'react';
-import { currentUser, User } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import { fetchPostById, deletePostById } from '../actions';
 import { notFound } from 'next/navigation';
 

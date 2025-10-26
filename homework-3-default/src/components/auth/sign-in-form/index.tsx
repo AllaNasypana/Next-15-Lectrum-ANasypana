@@ -30,14 +30,14 @@ export const SignInForm = () => {
     const { handleSubmit, control, register, formState: { errors, isValid, isSubmitting },  } = methods;
 
     const authMutation = useMutation({
-        mutationFn: async (provider: EAuthProvide) => {
+        mutationFn: async (provider: EAuthProvider) => {
             await signIn?.authenticateWithRedirect({
                 strategy: provider === EAuthProvider.google ? 'oauth_google' : 'oauth_github',
-                redirectUrlComplete: "/",
+                redirectUrlComplete: "/profile",
                 redirectUrl: "/sign-in",
             });
         },
-        onError: (error) => {
+        onError: (error, provider) => {
             const message = error?.message || `Something went wrong with authentication through ${provider === EAuthProvider.google ? 'Google' : 'HitHub'}`;
             toast.error(message, toastOptions);
         }
@@ -49,9 +49,12 @@ export const SignInForm = () => {
                 password: data.password,
                 identifier: data.email
             });
-            if(signInAttempt.status !== 'complete') throw new Error('Something went wrong');
-            await setActive({ session: signInAttempt.createdSessionId });
-            router.replace('/');
+            if(signInAttempt?.status !== 'complete') throw new Error('Something went wrong');
+            if(setActive) {
+                await setActive({ session: signInAttempt.createdSessionId });
+                router.replace('/profile');
+            }
+
         },
         onError: (err) => {
             const message = err?.message || 'Something went wrong' as unknown as string;

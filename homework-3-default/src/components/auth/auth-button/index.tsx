@@ -7,12 +7,12 @@ import {EAuthProvider} from '@/types';
 
 interface IProps {
     provider: EAuthProvider;
-    onClick: () => Promise<void>;
+    onClick: () => void;
     isLoaded: boolean;
 
 }
 
-export const AuthButton: FC<IProps> = ({provider, onClick, isLoaded}) => {
+export const AuthButton: FC<IProps> = ({provider, onClick, isLoaded, }) => {
     const baseStyles = 'font-bold py-2 px-4 rounded mt-4 w-full flex items-center justify-center gap-4 border text-gray-500 border-gray-500 '
     const styles = isLoaded ? baseStyles  + '': baseStyles + 'hover:shadow-md hover:cursor-pointer';
     let content = (
@@ -29,7 +29,8 @@ export const AuthButton: FC<IProps> = ({provider, onClick, isLoaded}) => {
     }
 
     return (
-        <button className={styles} type={'button'} onClick={onClick} disabled={isLoaded}>
+        <button
+            className={styles} type={'button'} onClick={onClick} disabled={isLoaded}>
             {content}
         </button>
     )

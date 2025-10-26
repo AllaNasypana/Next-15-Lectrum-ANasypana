@@ -1,7 +1,7 @@
 'use client'
 
 
-import {useState, use} from 'react';
+import {useState} from 'react';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Control, FieldValues, useForm, UseFormRegister} from 'react-hook-form';
 import { CustomInput, CustomTextarea } from '@/components/form-elements';
@@ -9,18 +9,19 @@ import {postSchema, PostSchema} from '@/schems';
 import { Tables } from '@/types/database.types';
 import { PostAction } from './post-action';
 import { usePosts } from './usePosts';
-import {User } from '@clerk/nextjs/server';
+
 
 interface IProps {
     post: Tables<'posts'> | null;
     isOwner: boolean;
-    deleteAction?: (id: string) => Promise<void>;
+    deleteAction?: (id: string, isPosts: boolean) => Promise<void>;
 }
 
 export const PostForm = ({post, isOwner, deleteAction}: IProps) => {
 
-    const { mutation: {isPending, mutate }} = usePosts();
     const [isEditing, setEditing] = useState(!post);
+    const { mutation: {isPending, mutate }} = usePosts();
+
 
     const methods = useForm<PostSchema>({
         resolver: zodResolver(postSchema),
@@ -37,7 +38,7 @@ export const PostForm = ({post, isOwner, deleteAction}: IProps) => {
 
     const onSubmit = async (data: PostSchema) => {
         if(!isValid || isSubmitting || isPending || !isEditing) return;
-        await mutate({post: data, id: post?.id});
+        mutate({post: data, id: post?.id});
     }
 
     return (
@@ -74,7 +75,7 @@ export const PostForm = ({post, isOwner, deleteAction}: IProps) => {
                     name='description'
                     label={'Post Description'}
                     rows={5}
-                    type="text" placeholder="Enter description..." />
+                    placeholder="Enter description..." />
 
                 {isEditing && (<button
                     type={'submit'}

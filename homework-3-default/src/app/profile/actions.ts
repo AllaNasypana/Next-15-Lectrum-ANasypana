@@ -1,24 +1,29 @@
+"use server";
+
 import { createClient } from '@/utils/supabase/server';
+import { currentUser} from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 
-export const getUsers = async () => {
+export const getUser = async () => {
+    const user = await currentUser();
+    if(!user){
+        redirect('/')
+    }
     const supabase = await createClient();
-    const {data, error } =  await supabase.from('users').select('*');
 
-    return {data, error};
-}
+    const { data } =  await supabase.from('users').select('*')
+        .eq("user_id", user.id);
 
-export const createPost = async () => {
-    const supabase = await createClient();
-    const {data, error} =  await supabase.from('posts').insert({
-        title: `Second post -${new Date().toISOString()}`,
-    });
-    console.log(data, error)
-}
+    if(!!data && !!data.length) {
+        return data[0]
+    }
+    const res = await supabase.from('users').insert({
+        email: user.emailAddresses[0].emailAddress,
+        name: user.username || user.fullName || ''
+    }).select().single();
 
-export const getPosts = async () => {
-    const supabase = await createClient();
-    const {data, error } =  await supabase.from('posts').select('*');
+    if(res.error) throw res.error;
 
-    return {data, error};
+    return res.data
 }

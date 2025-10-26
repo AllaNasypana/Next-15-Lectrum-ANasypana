@@ -13,6 +13,7 @@ import { Tables } from '@/types/database.types'
 export const usePosts = () => {
     const { getToken } = useAuth();
     const router = useRouter();
+
     const onAddPost = async (post: PostSchema): Promise<Tables<'posts'>> => {
         const token = await getToken({
             template: "supabase",
@@ -67,13 +68,11 @@ export const usePosts = () => {
             }
             return onUpdatePost(data.id, data.post);
         },
-        onError: (err: unknown) => {
-            const typedError = err as Error;
-            const message = typedError?.message || 'Something went wrong' as unknown as string;
+        onError: (err) => {
+            const message = err?.message || 'Something went wrong' as unknown as string;
             toast.error(message, toastOptions);
-
         },
-        onSuccess: async (data: Tables<'posts'>) => {
+        onSuccess: async () => {
             await revalidateSpecificPath('/posts');
             router.push('/posts');
         }

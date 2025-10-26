@@ -19,6 +19,10 @@ const headersRoutes = [
         href: '/posts',
         label: 'Posts',
     },
+    {
+        href: '/users',
+        label: 'Users',
+    },
 
 ]
 

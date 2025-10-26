@@ -18,7 +18,7 @@ export default async function PostsPage({ searchParams  }: { searchParams : Prom
         <div className="w-full flex flex-col justify-center">
             <h1 className={'text-2xl text-gray-800 text-center font-bold m-6' }>List of Posts</h1>
             <div className={'flex justify-between py-4 items-center'}>
-                <RefreshButton />
+                <RefreshButton path={'/posts'}/>
                 <Link
                     className={'flex items-center text-blue-500 gap-1 hover:font-bold p-2'}
                     href="/posts/add-new-post">

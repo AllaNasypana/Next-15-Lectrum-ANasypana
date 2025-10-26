@@ -31,7 +31,6 @@ export const SignUpForm = () => {
         mode: 'onTouched',
         defaultValues: {
             email: '',
-            name: '',
             password: '',
             confirmPassword: '',
             code: ''
@@ -44,11 +43,11 @@ export const SignUpForm = () => {
         mutationFn: async (provider: EAuthProvider) => {
             await signUp?.authenticateWithRedirect({
                 strategy: provider === EAuthProvider.google ? 'oauth_google' : 'oauth_github',
-                redirectUrlComplete: "/",
+                redirectUrlComplete: "/profile",
                 redirectUrl: "/sign-in",
             });
         },
-        onError: (error: Error) => {
+        onError: (error: Error, provider) => {
             const message = error?.message || `Something went wrong with authentication through ${provider === EAuthProvider.google ? 'Google' : 'HitHub'}`;
             toast.error(message, toastOptions);
         }
@@ -61,22 +60,24 @@ export const SignUpForm = () => {
                 await signUp?.create({
                     password: formData.password,
                     emailAddress: formData.email,
-                    username: formData.name
                 });
-                await signUp.prepareEmailAddressVerification({strategy: "email_code"});
+                await signUp?.prepareEmailAddressVerification({strategy: "email_code"});
                 setActiveStep(1);
                 return
             }
             if (step === 1) {
                 const formData = data as unknown as VerifyCodeSchema;
-                const completeSignUp = await signUp.attemptEmailAddressVerification({
+                const completeSignUp = await signUp?.attemptEmailAddressVerification({
                     code: formData.code
                 });
-                if(completeSignUp.status !== "complete") throw new Error('Invalid code');
-                await setActive({session: completeSignUp.createdSessionId});
-                setActiveStep(0);
-                router.push("/profile");
-                return;
+                if(completeSignUp?.status !== "complete") throw new Error('Invalid code');
+                if(setActive) {
+                    await setActive({session: completeSignUp?.createdSessionId});
+                    setActiveStep(0);
+                    router.push("/profile");
+                    return;
+                }
+
             }
         },
         onError: (error: Error) => {
@@ -111,11 +112,11 @@ export const SignUpForm = () => {
             <div className={'w-full flex gap-4'}>
                 <AuthButton
                     provider={EAuthProvider.google}
-                    onClick={ () => !loading && authMutation.mutate(EAuthProvider.google)}
+                    onClick={ () => authMutation.mutate(EAuthProvider.google)}
                     isLoaded={loading} />
                 <AuthButton
                     provider={EAuthProvider.github}
-                    onClick={ () => !loading && authMutation.mutate(EAuthProvider.github)}
+                    onClick={ () => authMutation.mutate(EAuthProvider.github)}
                     isLoaded={loading} />
 
             </div>

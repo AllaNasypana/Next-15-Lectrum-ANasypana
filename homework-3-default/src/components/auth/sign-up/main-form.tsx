@@ -23,15 +23,6 @@ export const MainForm:FC<IProps> = ({isLoaded}) => {
                 label={'Enter email'}
                 type="text" placeholder="Enter email" className={'mb-3'} />
             <CustomInput
-                key={'name'}
-                control={control}
-                register={register}
-                disabled={isLoaded}
-                error={(errors.name?.message || '') as unknown as string}
-                name='name'
-                label={'Enter your name'}
-                type="text" placeholder="Enter name" className={'mb-3'} />
-            <CustomInput
                 key={'password'}
                 control={control}
                 register={register}

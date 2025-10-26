@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import { IconButton } from '../icon-button';
 
 interface IProps {
-    deleteAction?: (id: string) => Promise<void>;
+    deleteAction?: (id: string, isPosts: boolean) => Promise<void>;
     onEdit: () => void;
     id: string;
 }

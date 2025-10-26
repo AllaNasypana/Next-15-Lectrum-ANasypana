@@ -1,10 +1,10 @@
 'use client'
 
 
-import { InputHTMLAttributes, FC} from 'react';
+import {  FC, TextareaHTMLAttributes} from 'react';
 import { Controller, Control,  UseFormRegister, FieldValues} from 'react-hook-form';
 
-interface IProps extends InputHTMLAttributes<HTMLTextAreaElement> {
+interface IProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     label?: string;
     error?: string;
     control?: Control;

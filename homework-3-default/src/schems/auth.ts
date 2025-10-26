@@ -17,9 +17,6 @@ export const verifyCodeSchema = z.object({
 
 export const signUpSchema = z.object({
     email: z.email(),
-    name: z.string().max(400, {
-        message: 'Name must be at max 400 characters'
-    }).optional(),
     password: z.string().min(7, {
         message: 'Password must be at least 7 characters'
     }),
