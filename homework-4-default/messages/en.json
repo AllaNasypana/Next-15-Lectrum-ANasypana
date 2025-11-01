@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "title": "Internationalization Demo",
+    "description": "This is a simple example of language switching using next-intl with localized URLs and meta tags",
+    "keywords": "internationalization, i18n, next.js, react, localization, multilingual",
+    "siteName": "Multilingual Demo Site"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Internationalization Demo",
+    "description": "This is a simple example of language switching using next-intl",
+    "paragraph1": "This is the first paragraph of content that demonstrates how text changes when switching languages.",
+    "paragraph2": "Here is another paragraph to show the internationalization in action."
+  },
+
+  "about": {
+    "title": "About Us",
+    "description": "Learn more about our company and mission",
+    "content": "We are a company dedicated to providing excellent internationalization solutions for modern web applications."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with our team",
+    "content": "Feel free to reach out to us for any questions or inquiries:",
+    "email": "📧 Email: contact@example.com",
+    "phone": "📞 Phone: +1 (555) 123-4567"
+  }
+
+}
