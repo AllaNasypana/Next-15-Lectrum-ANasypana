@@ -22,16 +22,11 @@ const headersRoutes = [
         href: '/contact',
         label: 'Contact',
     },
-
-
 ]
 
 
 export const Header = () => {
     const t = useTranslations('navigation');
-
-
-
 
     const { language, onSelectLanguage } = useLanguage();
 
@@ -39,8 +34,6 @@ export const Header = () => {
         ...l,
         label: t(l.key)
     }))
-
-
 
 
     return (
@@ -59,7 +52,6 @@ export const Header = () => {
                             onSelectLanguage(e.target.value);
                         }}
                         options={supportedLocales.map(l => ({label: l.toUpperCase(), value: l}))} />
-
 
                 </div>
             </nav>
