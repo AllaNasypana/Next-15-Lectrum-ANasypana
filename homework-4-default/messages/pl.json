@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "title": "Demo internacjonalizacji",
+    "description": "TOto prosty przykład przełączania języka przy użyciu next-intl z lokalnymi adresami URL i meta tagami",
+    "keywords": "internacjonalizacji, i18n, next.js, react, lokalizacja, wielojęzyczność",
+    "siteName": "Wielojęzyczna witryna demonstracyjna"
+  },
+  "navigation": {
+    "home": "Główna",
+    "about": "O nas",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "title": "Demo internacjonalizacji",
+    "description": "Oto prosty przykład przełączania języka za pomocą next-intl",
+    "paragraph1": "To pierwszy akapit treści pokazujący, jak tekst zmienia się przy zmianie języka.",
+    "paragraph2": "Oto kolejny akapit obrazujący internacjonalizację w działaniu."
+  },
+
+  "about": {
+    "title": "O nas",
+    "description": "Dowiedz się więcej o naszej firmie i misji",
+    "content": "Jesteśmy firmą specjalizującą się w dostarczaniu doskonałych rozwiązań internacjonalizacyjnych dla nowoczesnych aplikacji internetowych."
+  },
+  "contact": {
+    "title": "Skontaktuj się z nami",
+    "description": "Skontaktuj się z naszym zespołem",
+    "content": "Jeśli masz jakiekolwiek pytania lub wątpliwości, skontaktuj się z nami:",
+    "email": "📧 E-mail: contact@example.com",
+    "phone": "📞 Telefon: +1 (555) 123-4567"
+  }
+
+}
