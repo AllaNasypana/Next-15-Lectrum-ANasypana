@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Host
+Host: https://next-15-lectrum-a-nasypana.vercel.app
+
+# Sitemaps
+Sitemap: https://next-15-lectrum-a-nasypana.vercel.app/sitemap.xml
+Sitemap: https://next-15-lectrum-a-nasypana.vercel.app/server-sitemap.xml
