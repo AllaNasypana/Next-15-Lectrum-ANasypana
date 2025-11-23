@@ -38,7 +38,6 @@ module.exports = {
     if (path === '/') priority = 1.0;
     else if (path.startsWith('/post')) priority = 0.9;
     else if (path.startsWith('/ua')) priority = 0.6;
-
     return {
       loc: path,
       changefreq: 'weekly',

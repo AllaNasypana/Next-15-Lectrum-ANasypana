@@ -1,5 +1,5 @@
 import { URL_BASE } from '../../config';
-import { IPost, IComment, IUser } from '../../types'
+import { IPost, IUser } from '../../types'
 
 
 export const getPosts = async () => {
